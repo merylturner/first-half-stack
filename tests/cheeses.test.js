@@ -41,7 +41,17 @@ describe('cheese resource', () => {
             });
     });
 
-    it('gets all', () => {
+    it('get by id', () => {
+        const gouda = { name: 'gouda', origin: 'Holland' };
+        return request.post('/cheeses')
+            .send(gouda)
+            .then(res => res.body)
+            .then(cheese => request.get(`/cheeses/${cheese._id}`))
+            .then(res => {
+                const got = res.body;
+                console.log('got is', got);
+                assert.equal(got.origin, gouda.origin);
+            });
 
     });
 });
