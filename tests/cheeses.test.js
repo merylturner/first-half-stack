@@ -26,4 +26,15 @@ describe('cheese resource', () => {
                 assert.equal(saved.origin, cheese.origin);
             });
     });
+
+    it('gets', () => {
+        return request.get('/cheeses')
+            .then(res => {
+                const got = res.body[0];
+                assert.ok(got._id);
+                assert.equal(got.name,'cheddar');
+                assert.equal(got.origin,'England');
+            });
+
+    });
 });
