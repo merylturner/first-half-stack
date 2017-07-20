@@ -1,4 +1,4 @@
-##Half Stack Lab
+## Half Stack Lab
 
 Developers:
 * Meryl Turner
