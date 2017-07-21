@@ -32,7 +32,7 @@ describe('cheese resource', () => {
             });
 
     });
-
+    // need to test that id property is on returned objects
     it('gets all', () => {
         return request.get('/cheeses')
             .then(res => {
@@ -53,11 +53,12 @@ describe('cheese resource', () => {
             });
     });
 
-    it('returns code 404 if resource not found', () => {
+    it.only('returns code 404 if resource not found', () => {
         return request.get('/cheeses/123456789012345678901234')
             .then(res => {
-                const status = res.body;
-                assert.equal(status.code, 404);
+                console.log('res in test is', res);
+                // const status = res.statusMessage;
+                assert.equal(res.StatusMessage, 404);
             });
     });
 });
