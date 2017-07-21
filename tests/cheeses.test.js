@@ -21,6 +21,7 @@ describe('cheese resource', () => {
         { name: 'havarti', origin: 'Denmark' }
     ];
     let testCheese = {};
+    let otherCheese = {};
 
     it('saves', () => {
         return request.post('/cheeses')
@@ -38,6 +39,7 @@ describe('cheese resource', () => {
             .then(res => {
                 let got = res.body;
                 testCheese = got[0];
+                otherCheese = got[1];
                 assert.equal(got.length, cheese.length);
                 assert.ok(got[0]._id);
             });
@@ -79,6 +81,16 @@ describe('cheese resource', () => {
                 console.log('res is', res);
                 const message = JSON.parse(res.text);
                 assert.deepEqual(message, { removed: false });
+            });
+
+    });
+
+    it('update item by id', () => {
+        return request.put(`/cheeses/${otherCheese._id}`)
+            .then(() => request.get(`/cheeses/${otherCheese._id}`))
+            .then(res => {
+                const got = res.body;
+                assert.equal(got.name, 'camembert');
             });
     });
 });
