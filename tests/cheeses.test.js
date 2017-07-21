@@ -53,12 +53,13 @@ describe('cheese resource', () => {
             });
     });
 
-    it.only('returns code 404 if resource not found', () => {
+    it('returns code 404 if resource not found', () => {
         return request.get('/cheeses/123456789012345678901234')
-            .then(res => {
-                console.log('res in test is', res);
-                // const status = res.statusMessage;
-                assert.equal(res.StatusMessage, 404);
-            });
+            .then(
+                () => {
+                    throw new Error('Expected 404 error instead got 200');
+                },
+                err => assert.ok(err.response.notFound)
+            );
     });
 });
