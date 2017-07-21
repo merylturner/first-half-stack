@@ -20,6 +20,7 @@ describe('cheese resource', () => {
         { name: 'brie', origin: 'France' },
         { name: 'havarti', origin: 'Denmark' }
     ];
+    let testCheese = {};
 
     it('saves', () => {
         return request.post('/cheeses')
@@ -32,12 +33,13 @@ describe('cheese resource', () => {
             });
 
     });
-    // need to test that id property is on returned objects
     it('gets all', () => {
         return request.get('/cheeses')
             .then(res => {
-                const got = res.body;
+                let got = res.body;
+                testCheese = got[0];
                 assert.equal(got.length, cheese.length);
+                assert.ok(got[0]._id);
             });
     });
 
@@ -61,5 +63,22 @@ describe('cheese resource', () => {
                 },
                 err => assert.ok(err.response.notFound)
             );
+    });
+
+    it('removes object by id', () => {
+        return request.delete(`/cheeses/${testCheese._id}`)
+            .then(res => {
+                const message = JSON.parse(res.text);
+                assert.deepEqual(message, { removed: true });
+            });
+    });
+
+    it.skip('returns false if trying to remove id not there', () => {
+        return request.delete('/cheeses/123456789012345678901234')
+            .then(res => {
+                console.log('res is', res);
+                const message = JSON.parse(res.text);
+                assert.deepEqual(message, { removed: false });
+            });
     });
 });
