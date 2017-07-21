@@ -49,9 +49,15 @@ describe('cheese resource', () => {
             .then(cheese => request.get(`/cheeses/${cheese._id}`))
             .then(res => {
                 const got = res.body;
-                console.log('got is', got);
                 assert.equal(got.origin, gouda.origin);
             });
+    });
 
+    it('returns code 404 if resource not found', () => {
+        return request.get('/cheeses/123456789012345678901234')
+            .then(res => {
+                const status = res.body;
+                assert.equal(status.code, 404);
+            });
     });
 });
