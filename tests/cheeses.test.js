@@ -75,10 +75,9 @@ describe('cheese resource', () => {
             });
     });
 
-    it.skip('returns false if trying to remove id not there', () => {
+    it('returns false if trying to remove id not there', () => {
         return request.delete('/cheeses/123456789012345678901234')
             .then(res => {
-                console.log('res is', res);
                 const message = JSON.parse(res.text);
                 assert.deepEqual(message, { removed: false });
             });
