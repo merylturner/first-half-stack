@@ -3,11 +3,11 @@
 
 ## Directions
 
-Convert your vanilla NodeJS http server from previous loab into an ExpressJS app:
+Convert your vanilla NodeJS http server from previous lab into an ExpressJS app:
   * Use `app.<method>` handlers
   * Use `:id` to handle params
   * Use `body-parser` for request body
-  * Use `res.send` or `res.json` for `application/json` responses (remove vanilla content type setting
+  * Use `res.send` or `res.json` for `application/json` responses (remove vanilla content type setting)
   
 New requirements:
 * Add the ability to submit a `query` as part of `GET` all. Choose 2 properties that you allow to be queried, 
