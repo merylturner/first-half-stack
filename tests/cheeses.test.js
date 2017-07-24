@@ -57,8 +57,8 @@ describe('cheese resource', () => {
             });
     });
 
-    it('returns code 404 if resource not found', () => {
-        return request.get('/cheeses/123456789012345678901234')
+    it.only('returns code 404 if resource not found', () => {
+        return request.get('/cheeses/12345678901234567890134')
             .then(
                 () => {
                     throw new Error('Expected 404 error instead got 200');
