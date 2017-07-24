@@ -45,7 +45,7 @@ describe('cheese resource', () => {
             });
     });
 
-    it('get by id', () => {
+    it.only('get by id', () => {
         const gouda = { name: 'gouda', origin: 'Holland' };
         return request.post('/cheeses')
             .send(gouda)
