@@ -23,7 +23,7 @@ describe('cheese resource', () => {
     let testCheese = {};
     let otherCheese = {};
 
-    it('saves', () => {
+    it.only('saves', () => {
         return request.post('/cheeses')
             .send(cheese)
             .then(res => {
