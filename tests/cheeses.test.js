@@ -34,7 +34,7 @@ describe('cheese resource', () => {
             });
 
     });
-    it('gets all', () => {
+    it.only('gets all', () => {
         return request.get('/cheeses')
             .then(res => {
                 let got = res.body;
