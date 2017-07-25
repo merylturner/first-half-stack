@@ -23,7 +23,7 @@ describe('cheese resource', () => {
     let testCheese = {};
     let otherCheese = {};
 
-    it.only('saves', () => {
+    it('saves', () => {
         return request.post('/cheeses')
             .send(cheese)
             .then(res => {
@@ -34,7 +34,7 @@ describe('cheese resource', () => {
             });
 
     });
-    it.only('gets all', () => {
+    it('gets all', () => {
         return request.get('/cheeses')
             .then(res => {
                 let got = res.body;
@@ -45,7 +45,7 @@ describe('cheese resource', () => {
             });
     });
 
-    it.only('get by id', () => {
+    it('get by id', () => {
         const gouda = { name: 'gouda', origin: 'Holland' };
         return request.post('/cheeses')
             .send(gouda)
@@ -53,12 +53,11 @@ describe('cheese resource', () => {
             .then(cheese => request.get(`/cheeses/${cheese._id}`))
             .then(res => {
                 const got = res.body;
-                console.log('res is',res);
                 assert.equal(got.origin, gouda.origin);
             });
     });
 
-    it('returns code 404 if resource not found', () => {
+    it.only('returns code 404 if resource not found', () => {
         return request.get('/cheeses/123456789012345678901234')
             .then(
                 res => {
@@ -69,7 +68,7 @@ describe('cheese resource', () => {
             );
     });
 
-    it.only('removes object by id', () => {
+    it('removes object by id', () => {
         return request.delete(`/cheeses/${testCheese._id}`)
             .then(res => {
                 const message = JSON.parse(res.text);
