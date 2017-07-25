@@ -34,17 +34,6 @@ describe('cheese resource', () => {
             });
 
     });
-        
-    it('gets all', () => {
-        return request.get('/cheeses')
-            .then(res => {
-                let got = res.body;
-                testCheese = got[0];
-                otherCheese = got[1];
-                assert.equal(got.length, cheese.length);
-                assert.ok(got[0]._id);
-            });
-    });
 
     it('query: gets by name', () => {
         return request.get('/cheeses?name=cheddar')
@@ -54,6 +43,16 @@ describe('cheese resource', () => {
                 assert.equal(got.origin, 'England');
             });
     });
+
+    it('query: gets by name and origin', () => {
+        return request.get('/cheeses?name=cheddar&origin=England')
+            .then(res => {
+                let got = res.body[0];
+                assert.equal(got.name, 'cheddar');
+                assert.equal(got.origin, 'England');
+            });
+    });
+
     it('gets all', () => {
         return request.get('/cheeses')
             .then(res => {
@@ -77,11 +76,10 @@ describe('cheese resource', () => {
             });
     });
 
-    xit('returns code 404 if resource not found', () => {
+    it('returns code 404 if resource not found', () => {
         return request.get('/cheeses/123456789012345678012234')
             .then(
-                res => {
-                    console.log('response is',res);
+                () => {
                     throw new Error('Expected 404 error instead got 200');
                 },
                 err => assert.ok(err.response.notFound)
