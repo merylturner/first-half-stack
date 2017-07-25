@@ -53,14 +53,16 @@ describe('cheese resource', () => {
             .then(cheese => request.get(`/cheeses/${cheese._id}`))
             .then(res => {
                 const got = res.body;
+                console.log('res is',res);
                 assert.equal(got.origin, gouda.origin);
             });
     });
 
-    it.only('returns code 404 if resource not found', () => {
+    it('returns code 404 if resource not found', () => {
         return request.get('/cheeses/123456789012345678901234')
             .then(
-                () => {
+                res => {
+                    console.log('response is',res);
                     throw new Error('Expected 404 error instead got 200');
                 },
                 err => assert.ok(err.response.notFound)
