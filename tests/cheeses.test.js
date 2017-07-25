@@ -32,7 +32,6 @@ describe('cheese resource', () => {
                 assert.equal(saved.name, cheese[0].name);
                 assert.equal(saved.origin, cheese[0].origin);
             });
-
     });
 
     it('query: gets by name', () => {
@@ -100,7 +99,6 @@ describe('cheese resource', () => {
                 const message = JSON.parse(res.text);
                 assert.deepEqual(message, { removed: false });
             });
-
     });
 
     it('update item by id', () => {
@@ -121,7 +119,7 @@ describe('cheese resource', () => {
                 assert.equal(res.body.winePairings, 'chardonnay');
             });
     });
-        
+
     it('deletes property within child array', () => {
         return request.delete(`/cheeses/${otherCheese._id}/wine-pairings`)
             .send({ winePairing: 'chardonnay' })
@@ -129,5 +127,4 @@ describe('cheese resource', () => {
                 assert.deepEqual(res.body.winePairings, []);
             });
     });
-
 });
