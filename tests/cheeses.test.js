@@ -57,8 +57,8 @@ describe('cheese resource', () => {
             });
     });
 
-    it.only('returns code 404 if resource not found', () => {
-        return request.get('/cheeses/123456789012345678901234')
+    xit('returns code 404 if resource not found', () => {
+        return request.get('/cheeses/123456789012345678012234')
             .then(
                 res => {
                     console.log('response is',res);
