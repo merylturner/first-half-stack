@@ -34,6 +34,26 @@ describe('cheese resource', () => {
             });
 
     });
+        
+    it('gets all', () => {
+        return request.get('/cheeses')
+            .then(res => {
+                let got = res.body;
+                testCheese = got[0];
+                otherCheese = got[1];
+                assert.equal(got.length, cheese.length);
+                assert.ok(got[0]._id);
+            });
+    });
+
+    it('query: gets by name', () => {
+        return request.get('/cheeses?name=cheddar')
+            .then(res => {
+                let got = res.body[0];
+                assert.equal(got.name, 'cheddar');
+                assert.equal(got.origin, 'England');
+            });
+    });
     it('gets all', () => {
         return request.get('/cheeses')
             .then(res => {
