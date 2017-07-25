@@ -86,11 +86,22 @@ describe('cheese resource', () => {
     });
 
     it('update item by id', () => {
+        otherCheese.name = 'camembert';
         return request.put(`/cheeses/${otherCheese._id}`)
             .then(() => request.get(`/cheeses/${otherCheese._id}`))
             .then(res => {
                 const got = res.body;
                 assert.equal(got.name, 'camembert');
             });
+    });
+
+    it('updates cheese with child array property', () => {
+        return request.post(`/cheeses/${otherCheese._id}/wine-pairings`)
+            .send({ winePairing: 'chardonnay' })
+            .then(res => {
+                assert.ok(res.body.winePairings);
+                assert.equal(res.body.winePairings, 'chardonnay');
+            });
+
     });
 });
