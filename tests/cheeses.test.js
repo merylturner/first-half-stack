@@ -57,7 +57,7 @@ describe('cheese resource', () => {
             });
     });
 
-    it('returns code 404 if resource not found', () => {
+    it.only('returns code 404 if resource not found', () => {
         return request.get('/cheeses/123456789012345678901234')
             .then(
                 () => {
@@ -67,7 +67,7 @@ describe('cheese resource', () => {
             );
     });
 
-    it('removes object by id', () => {
+    it.only('removes object by id', () => {
         return request.delete(`/cheeses/${testCheese._id}`)
             .then(res => {
                 const message = JSON.parse(res.text);
